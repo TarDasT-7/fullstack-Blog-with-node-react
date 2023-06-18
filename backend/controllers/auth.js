@@ -1,0 +1,88 @@
+import User from "../models/user.js";
+import shortId from "shortid";
+import jwt from 'jsonwebtoken';
+import { expressjwt } from "express-jwt";
+
+export const register = (req, res) => {
+
+    User.findOne({ 'email': req.body.email })
+        .then((result) => {
+
+            if (result) {
+                return res.status(400).json({
+                    error: "email is taken"
+                })
+            } else {
+                const { name, email, password } = req.body;
+                let username = shortId.generate();
+                let profile = `${process.env.CLIENT_URL}/profile/${username}`;
+
+                let newUser = new User({ name, email, password, profile, username });
+                newUser.save();
+
+                return res.json({
+                    user: newUser
+                })
+            }
+        })
+        .catch((err) => {
+            return res.status(400).json({
+                error: 'error'
+            })
+        });
+
+    return;
+}
+
+export const login = (req, res) => {
+
+    const { email, password } = req.body;
+
+    User.findOne({ email })
+        .then((user) => {
+
+            if (!user) {
+                return res.status(400).json({
+                    error: "User with this email does not exists."
+                })
+            }
+
+            if (!user.authenticate(password)) {
+                return res.status(400).json({
+                    error: "Email and Password do not match"
+                })
+            }
+
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+            res.cookie('token', token, { expiresIn: '1d' });
+            const { _id, username, name, email, role } = user;
+
+            return res.json({
+                token,
+                user: { _id, username, name, email, role }
+            })
+
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.status(400).json({
+                error: 'err'
+            })
+        });
+
+    return;
+
+}
+
+export const signOut = (req, res) => {
+    res.clearCookie("token");
+    res.json({
+        message: 'Sign Out successfully'
+    })
+};
+
+export const requireLogin = expressjwt({
+    secret: process.env.JWT_SECRET,
+    algorithms: ["HS256"],
+
+})
