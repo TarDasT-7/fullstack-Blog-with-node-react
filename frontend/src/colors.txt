@@ -1,0 +1,6 @@
+light 01 : #ECECEC
+
+
+dark 01 : #181818
+
+yellow 01: #e9bc0b

@@ -1,0 +1,120 @@
+:root {
+    --dark: #181818;
+    --light: #ECECEC;
+    --light2: #ecececbe;
+    --yellow: #e9bc0b;
+}
+
+
+.form_box {
+    width: 400px;
+    min-height: 40px;
+    background-color: var(--light);
+    margin: 15px auto;
+    border-radius: 5px;
+    box-shadow: 5px 12px 30px #0e1e37f0;
+    border: 1px solid #181818;
+    background-position: center;
+    background-size: contain;
+}
+
+.form_header {
+    background-color: var(--light2);
+    padding: 10px;
+    text-align: center;
+    margin: 10px;
+    border-radius: 5px;
+
+    h1 {
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--dark);
+    }
+}
+
+.form_body {
+    background-color: var(--light2);
+    padding: 10px;
+    text-align: left;
+    margin: 10px;
+    border-radius: 5px;
+    color: var(--dark);
+
+    label {
+        display: block;
+        margin: 0 0 8px 0;
+        font-weight: 600;
+    }
+
+    input {
+        width: 300px;
+        outline: unset;
+        border: unset;
+        border-bottom: 3px solid #181818;
+        background-color: unset;
+        color: var(--dark);
+        margin: 0 0 30px 10px;
+        padding: 5px;
+        transition: .3s;
+
+        &::placeholder {
+            color: #181818ec;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            border-color: var(--yellow);
+            box-shadow: 5px 10px 20px #0e1e37f0;
+            border-radius: 5px;
+        }
+    }
+
+    button {
+
+        margin: 0 10px 5px;
+        padding: 5px 20px;
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        outline: unset;
+        border: unset;
+        color: #181818;
+        background-color: var(--yellow);
+        transition: .3s;
+
+        &:hover,
+        &:active,
+        &:focus {
+            opacity: .9;
+            box-shadow: 5px 10px 20px #0e1e37f0;
+
+        }
+    }
+}
+
+.form_footer {
+    margin: 10px 0 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--light);
+
+    a {
+        color: var(--yellow);
+        transition: .3s;
+        font-size: 18px;
+
+        &:hover {
+            color: #e9bd0be0;
+        }
+    }
+}
+
+.validatioErr {
+    color: #ce2222;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    right: 5px;
+}
