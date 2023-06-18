@@ -1,4 +1,4 @@
-# Blog project with Node & react - REST API
+# Blog project with Node & React - REST API
 
 <!-- ###  -->
 
