@@ -2,10 +2,10 @@
 
 <!-- ###  -->
 
-<h4> 
+<h3> 
 Hi guys. <br />
-I've just started a blog project and my goal is to get a better understanding of <span style="color:yellow;text-decoration:underline"> javascript </span> ( <b> full stack with node and react </b> )
-<h4>
+I've just started a blog project and my goal is to get a better understanding of <br /> <span style="color:yellow;text-decoration:underline"> javascript </span> ( <b> full stack with node and react </b> )
+<h3>
 
 <br />
 <br />
