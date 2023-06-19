@@ -119,3 +119,23 @@
     position: relative;
     right: 5px;
 }
+
+.result_action_error{
+    background-color: #ce2222;
+    color: #ECECEC;
+    padding: 5px 10px;
+    width: 100%;
+    position: relative;
+    left: -15px;
+    font-size: 16px;
+    font-weight: 500;
+    display:block ;
+    border-radius: 5px;
+}
+
+.result_action_seccess{
+    background-color: #28983a;
+    h1{
+        color: #ECECEC;
+    }
+}

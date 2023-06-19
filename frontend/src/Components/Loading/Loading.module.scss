@@ -1,0 +1,28 @@
+.loading_box{
+    background-color: #e9bc0b;
+    padding: 20px;
+    text-align: center;
+    width: 500px;
+    border-radius: 5px;
+    margin: 28vh auto;
+
+    animation-name: loading;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
+
+@keyframes loading {
+    0%{
+
+        box-shadow: 5px 12px 30px #0e1e3700;
+
+    }
+    50%{
+        box-shadow: 5px 12px 30px #0e1e37;
+
+    }
+    100%{
+        box-shadow: 5px 12px 30px #0e1e3700;
+
+    }
+  }
