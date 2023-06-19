@@ -35,7 +35,6 @@ export const register = (req, res) => {
                     })
 
                     //     user: { name, email, profile, username },
-
                 })
                     .catch(e => {
                         return res.status(400).json({
