@@ -13,12 +13,21 @@ router.post('/register', registerValidator, runValidation,  register);
 router.post('/login', loginValidator, runValidation,  login);
 router.get('/signout', signOut);
 
+
 //  test
 router.get('/secret',requireLogin ,(req, res)=>{
     res.json({
         message: "you have access to secret page"
     })
 })
+
+
+router.post('/registerTest', (req, res)=>{
+    return res.json({
+        message: "okaye"
+    })
+});
+
 
 
 export default router;

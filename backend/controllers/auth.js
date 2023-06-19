@@ -7,31 +7,41 @@ export const register = (req, res) => {
 
     User.findOne({ 'email': req.body.email })
         .then((result) => {
-
             if (result) {
+                console.log('if');
+
                 return res.status(400).json({
-                    error: "email is taken"
+                    error: "email address is already registered"
                 })
             } else {
+
                 const { name, email, password } = req.body;
                 let username = shortId.generate();
                 let profile = `${process.env.CLIENT_URL}/profile/${username}`;
 
                 let newUser = new User({ name, email, password, profile, username });
-                newUser.save();
 
-                return res.json({
-                    user: newUser
+                newUser.save().then(result => {
+                    return res.status(200).json({
+                        user: { name, email, profile, username },
+                        message: "register successfully"
+                    })
                 })
+                    .catch(e => {
+                        return res.status(400).json({
+                            error: e,
+                            message: "register Unsuccessfully, please check the server"
+
+                        })
+                    })
             }
         })
-        .catch((err) => {
+        .catch((error) => {
             return res.status(400).json({
-                error: 'error'
+                error: error,
+                message: "actions Unsuccessfully, please check the server"
             })
         });
-
-    return;
 }
 
 export const login = (req, res) => {

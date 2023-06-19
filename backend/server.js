@@ -29,8 +29,14 @@ app.use(cookieParser())
 
 // cors
 if (process.env.NODE_ENV === 'development') {
-    app.use(cors({ origin: `${process.env.CLIENT_URL}` }))
+    const corsOptions ={
+        origin:`${process.env.CLIENT_URL}`, 
+        credentials:true,
+        optionSuccessStatus:200
+    }
+    app.use(cors(corsOptions));
 }
+
 
 
 // routes middleware
