@@ -22,10 +22,20 @@ export const register = (req, res) => {
                 let newUser = new User({ name, email, password, profile, username });
 
                 newUser.save().then(result => {
+
+
+                    const token = jwt.sign({ _id: result._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+                    res.cookie('token', token, { expiresIn: '1d' });
+                    const { _id, username, name, email, role } = result;
+
                     return res.status(200).json({
-                        user: { name, email, profile, username },
+                        token,
+                        user: { _id, username, name, email, role },
                         message: "register successfully"
                     })
+
+                    //     user: { name, email, profile, username },
+
                 })
                     .catch(e => {
                         return res.status(400).json({
