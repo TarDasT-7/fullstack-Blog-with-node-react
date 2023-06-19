@@ -82,7 +82,7 @@
     display: flex;
     justify-content: start;
     align-items: center;
-    color: #d80d0d!important;
+    color: #d80d0d !important;
     background-position: center;
     background-size: contain;
 }
@@ -92,7 +92,7 @@ span {
     margin-left: 16px;
 }
 
-.home_icon{
+.home_icon {
 
     margin: -10px 0 0 2rem;
     font-size: 2rem;
@@ -144,7 +144,44 @@ span {
     .acount_title {
         font-size: 1.3rem;
         margin: 0 .5rem 0 0;
-        
+
     }
 
+}
+
+.user_bar {
+    background-color: #ECECEC;
+    position: absolute;
+    right: 35px;
+    top: 55px;
+    min-width: 170px;
+    border-radius: 5px;
+    border: 2px solid #181818;
+    padding: 10px;
+    text-align: left;
+    box-shadow: 5px 10px 20px #0e1e37c2;
+
+
+    ul {
+        text-align: left;
+        list-style: none;
+        display: contents;
+
+        li {
+            margin: 0 0 10px 5px;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 15px;
+            transition: .25s;
+            cursor: pointer;
+            border-bottom: 2px solid #181818;
+
+            &:hover {
+                background-color: #e9bc0b;
+                box-shadow: 5px 10px 20px #0e1e37c2;
+                border-radius: 5px;
+                border-color: #e9bc0b;
+            }
+        }
+    }
 }

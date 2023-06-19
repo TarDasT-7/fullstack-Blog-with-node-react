@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom"
 import classes from './Login.module.scss'
-import { login } from '../../Actions/Auth';
+import { login, authenticate } from '../../Actions/Auth';
 import { LoadingComponent } from '../Loading/Loading.component';
 
 
@@ -61,7 +61,11 @@ const Login = () => {
                     message: data.error
                 })
             } else {
-                history('/');
+                authenticate(data, ()=>{
+                    history('/');
+
+                })
+                
             }
         })
 
