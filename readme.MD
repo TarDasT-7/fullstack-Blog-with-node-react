@@ -18,7 +18,7 @@ I've just started a blog project and my goal is to get a better understanding of
         <a href="https://github.com/TarDasT-7/Blog-with-node-react-API/tree/main/backend"> show me Backend files</a>
     </li>
     <li>
-        <a > show me Frontend files</a>
+        <a href="https://github.com/TarDasT-7/Backednd-Blog/tree/main/frontend"> show me Frontend files</a>
     </li>
     
 <ul>
