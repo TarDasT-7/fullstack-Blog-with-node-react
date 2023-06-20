@@ -90,7 +90,13 @@ const Header = () => {
                                 ref={modalRef}
                             >
                                 <ul>
-                                    <li>profile</li>
+                                    <li onClick={() => {
+                                        isAuth().role === 1 ?
+                                            history('/admin')
+                                            :
+                                            history('/user');
+                                    }}>profile</li>
+
                                     <li onClick={() => signOut(() => {
                                         setUserBar(false);
                                         history('/login');
