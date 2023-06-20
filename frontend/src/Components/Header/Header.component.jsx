@@ -29,9 +29,9 @@ const Header = () => {
         useEffect(() => {
 
             function handleClickOutside(event) {
-                if (AccontRef.current.contains(event.target))
+                if (AccontRef.current && AccontRef.current.contains(event.target))
                     setUserBar(!userBar)
-                else if (!modalRef.current.contains(event.target))
+                else if (modalRef.current && !modalRef.current.contains(event.target))
                     setUserBar(false)
             }
 
