@@ -5,10 +5,8 @@ import { expressjwt } from "express-jwt";
 
 
 export const read = (req, res) => {
-
     req.profile.hashedPassword = undefined
     return res.json(req.profile)
-
 }
 
 export const register = (req, res) => {
@@ -16,8 +14,6 @@ export const register = (req, res) => {
     User.findOne({ 'email': req.body.email })
         .then((result) => {
             if (result) {
-                console.log('if');
-
                 return res.status(400).json({
                     error: "email address is already registered"
                 })
