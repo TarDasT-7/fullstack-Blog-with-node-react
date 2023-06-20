@@ -12,6 +12,7 @@ import mongoConection from "./mongoConection.js";
 // bring routes
 import blogRoutes from "./routes/blog.js";
 import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/user.js";
 
 
 // app
@@ -42,6 +43,7 @@ if (process.env.NODE_ENV === 'development') {
 // routes middleware
 app.use('/api', authRoutes);
 app.use('/api', blogRoutes);
+app.use('/api', userRoutes);
 
 
 // port
