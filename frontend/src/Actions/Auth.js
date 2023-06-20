@@ -3,6 +3,7 @@ import { API } from '../config';
 import _fetch from 'isomorphic-fetch';
 import cookie from 'js-cookie';
 import process from 'process'
+import { useNavigate } from 'react-router-dom';
 
 export const register = (user) => {
 
@@ -37,15 +38,17 @@ export const login = (user) => {
 }
 
 export const signOut = (next) => {
-
+    
     removeCookie('token');
     removeLocalStorage('user');
     next();
-
+    
     return _fetch(`${API}/signout`, {
         method: 'GET'
     }).then(response => {
         console.log('sign out successfuly');
+        const history = useNavigate();
+        history('/login');
     }).catch(error => {
         console.log(error);
     })

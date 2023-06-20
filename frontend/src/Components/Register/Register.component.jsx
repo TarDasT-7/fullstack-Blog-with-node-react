@@ -92,7 +92,10 @@ const Register = () => {
             } else {
 
                 authenticate(data, () => {
-                    history('/');
+                    if (isAuth() && isAuth().role === 1)
+                        history('/admin');
+                    else
+                        history('/user');
                 })
             }
         })
