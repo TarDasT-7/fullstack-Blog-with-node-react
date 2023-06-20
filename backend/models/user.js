@@ -42,7 +42,7 @@ const userSchema = new Schema({
     },
     role: {
         type: Number,
-        trim: true
+        default: 0
     },
     photo: {
         data: Buffer,

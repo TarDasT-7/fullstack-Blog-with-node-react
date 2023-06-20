@@ -13,37 +13,36 @@ import { isAuth, signOut } from "../../Actions/Auth";
 
 const Header = () => {
 
+    const walpaper = process.env.PUBLIC_URL + '/wallpaper/starry1.jpg'
+    const walpaper2 = process.env.PUBLIC_URL + '/wallpaper/starry2.jpg'
 
+    const history = useNavigate();
 
-    function useOutsideAlerter(ref) {
-        useEffect(() => {
-    
-            function handleClickOutside(event) {
-                if (ref.current && !ref.current.contains(event.target)) {
-                    setUserBar(false)
-                }
-            }
-            document.addEventListener("mousedown", handleClickOutside);
-            return () => {
-                document.removeEventListener("mousedown", handleClickOutside);
-            };
-        }, [ref]);
-    }
-
-    const wrapperRef = useRef(null);
-    useOutsideAlerter(wrapperRef);
-
+    const modalRef = useRef(null);
+    const AccontRef = useRef(null);
+    const [userBar, setUserBar] = useState(false)
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
 
 
-    const [userBar, setUserBar] = useState(false)
-    const showUserBar = () => setUserBar(!userBar)
+    function useOutsideClick(modalRef, AccontRef) {
+        useEffect(() => {
 
-    const history = useNavigate();
+            function handleClickOutside(event) {
+                if (AccontRef.current && AccontRef.current.contains(event.target))
+                    setUserBar(!userBar)
+                else if (modalRef.current && !modalRef.current.contains(event.target))
+                    setUserBar(false)
+            }
 
-    const walpaper = process.env.PUBLIC_URL + '/wallpaper/starry1.jpg'
-    const walpaper2 = process.env.PUBLIC_URL + '/wallpaper/starry2.jpg'
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [modalRef, AccontRef, userBar]);
+    }
+
+    useOutsideClick(modalRef, AccontRef);
 
     return (
         <div>
@@ -66,9 +65,9 @@ const Header = () => {
                     {/* {JSON.stringify(isAuth())} */}
                     {isAuth() ?
 
-                        <Link className={classes.accont_bar} title="Log out from your accont"
+                        <Link className={classes.accont_bar} title="your accont"
 
-                            onClick={() => showUserBar()}
+                            ref={AccontRef}
                         >
                             <span className={classes.acount_title}>
                                 <FaIcons.FaSortDown />
@@ -88,12 +87,12 @@ const Header = () => {
                     {
                         userBar ?
                             <div className={classes.user_bar}
-                                ref={wrapperRef}
+                                ref={modalRef}
                             >
                                 <ul>
                                     <li>profile</li>
                                     <li onClick={() => signOut(() => {
-                                        showUserBar();
+                                        setUserBar(false);
                                         history('/login');
                                     })}>log out</li>
                                 </ul>
