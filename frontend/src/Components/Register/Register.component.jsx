@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom"
 import classes from './Register.module.scss'
-import { register } from '../../Actions/Auth';
+import { authenticate, register } from '../../Actions/Auth';
 import { LoadingComponent } from '../Loading/Loading.component';
+import { isAuth } from '../../Actions/Auth'
 
 
 const Register = () => {
+
+    const history = useNavigate();
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -87,14 +90,9 @@ const Register = () => {
                     message: data.error
                 })
             } else {
-                setName('')
-                setEmail('')
-                setPassword('')
-                setConfirmedPassword('')
 
-                return setActionResult({
-                    success: true,
-                    message: data.message
+                authenticate(data, () => {
+                    history('/');
                 })
             }
         })
@@ -108,10 +106,9 @@ const Register = () => {
             ?
             <div className={classes.form_box} style={{ backgroundImage: `url(${walpaper})` }}>
 
-                <div className={`${classes.form_header} 
-                    ${actionResult.success === true ? classes.result_action_seccess : null}`}>
+                <div className={classes.form_header}>
 
-                    {actionResult.success === true ? <h1>{actionResult.message}</h1> : <h1>Register</h1>}
+                    <h1>Register</h1>
 
                 </div>
 
