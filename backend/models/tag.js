@@ -1,7 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-const categorySchema = new Schema({
-
+const tagSchema = new Schema({
     name: {
         type: String,
         trim: true,
@@ -13,8 +12,7 @@ const categorySchema = new Schema({
         unique: true,
         index: true
     }
-
 }, { timestamps: true });
 
 const conn = mongoose.createConnection(`${process.env.DATABASE_LOCAL}/${process.env.DATABASE_NAME}`);
-export default conn.model('Category', categorySchema);
+export default conn.model('Tag', tagSchema);
