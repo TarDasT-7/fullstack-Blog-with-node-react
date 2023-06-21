@@ -1,4 +1,6 @@
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route, Navigate, useLocation } from "react-router-dom"
+import nprogress from "nprogress";
+import { useEffect } from "react";
 
 import Register from './Components/Register/Register.component'
 import Login from './Components/Login/Login.component'
@@ -11,6 +13,17 @@ import Layout from "./Pages/Layout"
 
 
 export const RouteAPI = () => {
+
+    let location = useLocation();
+
+    useEffect(() => {
+        nprogress.configure({
+            speed: 700,
+
+        });
+        nprogress.start();
+        nprogress.done();
+    }, [location.pathname]);
 
     return (
         <>
