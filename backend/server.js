@@ -13,6 +13,8 @@ import mongoConection from "./mongoConection.js";
 import blogRoutes from "./routes/blog.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
+import categoryRoutes from './routes/category.js'
+
 
 
 // app
@@ -30,10 +32,10 @@ app.use(cookieParser())
 
 // cors
 if (process.env.NODE_ENV === 'development') {
-    const corsOptions ={
-        origin:`${process.env.CLIENT_URL}`, 
-        credentials:true,
-        optionSuccessStatus:200
+    const corsOptions = {
+        origin: `${process.env.CLIENT_URL}`,
+        credentials: true,
+        optionSuccessStatus: 200
     }
     app.use(cors(corsOptions));
 }
@@ -44,6 +46,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api', authRoutes);
 app.use('/api', blogRoutes);
 app.use('/api', userRoutes);
+app.use('/api', categoryRoutes);
 
 
 // port

@@ -1,6 +1,5 @@
 import express from "express"
 import { register, login, signOut, requireLogin } from "../controllers/auth.js";
-
 // validator
 
 import { runValidation } from "../validators/index.js";
