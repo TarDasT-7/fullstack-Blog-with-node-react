@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-
+import { IconContext } from "react-icons";
 import { Link, useNavigate } from "react-router-dom"
 
-import { IconContext } from "react-icons";
+
 import classes from './Header.module.scss'
 import { Sidebar } from "../../Data/MenuBar";
-
 import { isAuth, signOut } from "../../Actions/Auth";
 
 
 const Header = () => {
+
 
     const walpaper = process.env.PUBLIC_URL + '/wallpaper/starry1.jpg'
     const walpaper2 = process.env.PUBLIC_URL + '/wallpaper/starry2.jpg'
