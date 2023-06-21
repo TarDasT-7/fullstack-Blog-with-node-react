@@ -3,7 +3,6 @@ import { requireLogin, authMiddleware, adminMiddleware } from "../controllers/au
 import { read } from "../controllers/user.js";
 
 
-
 const router = express.Router();
 
 
