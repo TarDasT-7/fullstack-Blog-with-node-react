@@ -3,13 +3,9 @@ import slugify from 'slugify'
 import { errorHandler } from '../helpers/dbErrHandler.js'
 
 export const index = (req, res) => {
-
     return Category.find({}).then(cate => {
-
         return res.json(cate);
-
     });
-
 }
 
 export const store = (req, res) => {
@@ -76,9 +72,7 @@ export const update = (req, res) => {
 export const destroy = (req, res) => {
 
     try {
-
         const slug = req.params.slug.toLowerCase();
-
         return Category.findOneAndRemove({ slug }).then(doc => {
             if (doc) {
                 return res.json({
