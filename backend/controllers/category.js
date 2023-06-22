@@ -16,7 +16,7 @@ export const store = (req, res) => {
     Category.findOne({ 'slug': slug }).then(result => {
         if (result) {
             return res.status(400).json({
-                message: "You already created a category with this name and slug"
+                error: "You already created a category with this name and slug"
             })
         }
         const category = new Category({ name, slug });
@@ -46,7 +46,7 @@ export const show = (req, res) => {
 
         if (!cate) {
             return res.status(400).json({
-                message: 'we not found any category with this slug...'
+                error: 'we not found any category with this slug...'
             })
         }
         return res.json(cate);
@@ -55,18 +55,21 @@ export const show = (req, res) => {
 
 export const update = (req, res) => {
 
-    const slugParam = req.params.slug.toLowerCase();
+    const id = req.params.id;
+    
     const { name } = req.body;
     const slug = slugify(name).toLowerCase();
 
-    if (slugParam !== slug) {
-        Category.findOneAndUpdate({ slug: slugParam }, { name, slug }, { new: true });
-        return res.json("successfully acction")
-    }
-    return res.status(400).json({
-        message: `There seems to be a problem.If you *Really want to edit the category*, Find the category by *SLUG* and enter a *NEW NAME* for your category.Try again...`
+    Category.find({ slug }).then(result => {
+        if (result.length > 0) {
+            return res.status(400).json({
+                error: `You can not use this name: ${name}.It may have been used before...`
+            })
+        } else {
+            Category.findByIdAndUpdate({ _id: id }, { name: name, slug: slug }, { upsert: true }).catch(err => console.log(err));
+            return res.json("successfully acction")
+        }
     })
-
 }
 
 export const destroy = (req, res) => {
@@ -76,7 +79,7 @@ export const destroy = (req, res) => {
         return Category.findOneAndRemove({ slug }).then(doc => {
             if (doc) {
                 return res.json({
-                    message: doc.name + ' --removed successfuly'
+                    error: doc.name + ' --removed successfuly'
                 })
             }
             return res.status(400).json({
