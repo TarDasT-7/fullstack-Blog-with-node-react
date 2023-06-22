@@ -12,7 +12,7 @@ const router = express.Router();
 router.get('/category', index);
 router.post('/category', categoryCreateValidator, runValidation, requireLogin, adminMiddleware, store);
 router.get('/category/:slug', show);
-router.patch('/category/:slug', categoryCreateValidator, runValidation, requireLogin, adminMiddleware, update);
+router.patch('/category/:id', categoryCreateValidator, runValidation, requireLogin, adminMiddleware, update);
 router.delete('/category/:slug', runValidation, requireLogin, adminMiddleware, destroy);
 
 

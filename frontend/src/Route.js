@@ -10,12 +10,12 @@ import { isAuth } from "./Actions/Auth"
 import UserDashboardLayout from "./Pages/UserDashboardLayout"
 import AdminDashboardLayout from "./Pages/AdminDashboardLayout"
 import Layout from "./Pages/Layout"
-
+import { AdminIndexDashboard } from "./Dashboards/IndexDashboard";
+import { IndexCategory } from "./Components/CRUD/Categories/Category.component";
 
 export const RouteAPI = () => {
 
     let location = useLocation();
-
     useEffect(() => {
         nprogress.configure({
             speed: 700,
@@ -34,8 +34,10 @@ export const RouteAPI = () => {
                 <Route path="/login" element={isAuth() ? <Navigate to="/" replace /> : <Layout> <Login /> </Layout>} />
 
 
-                <Route path="/user" element={<UserDashboardLayout> <h1> user </h1> </UserDashboardLayout>} />
-                <Route path="/admin" element={<AdminDashboardLayout> <h1> admin </h1> </AdminDashboardLayout>} />
+                <Route path="/admin" element={<AdminDashboardLayout> <AdminIndexDashboard /> </AdminDashboardLayout>} />
+                <Route path="/admin/categories" element={<AdminDashboardLayout> <IndexCategory /> </AdminDashboardLayout>} />
+
+                {/* <Route path="/user" element={<UserDashboardLayout> <h1> user </h1> </UserDashboardLayout>} /> */}
 
             </Routes>
 
