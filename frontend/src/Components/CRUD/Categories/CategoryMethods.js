@@ -92,7 +92,7 @@ export const CategoryEdit = (props) => {
     const slug = props.slug;
     const [error, setError] = useState()
     const [notFound, setNotFound] = useState(null)
-    const [value, setValue] = useState(null)
+    const [value, setValue] = useState('')
     const [categoryName, setCategoryName] = useState(null)
     const [categoryID, setCategoryID] = useState(null)
     const token = getCookie('token')

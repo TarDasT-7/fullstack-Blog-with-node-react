@@ -25,6 +25,7 @@ export const RouteAPI = () => {
         nprogress.done();
     }, [location.pathname]);
 
+
     return (
         <>
             <Routes>
@@ -32,7 +33,6 @@ export const RouteAPI = () => {
 
                 <Route path="/register" element={isAuth() ? <Navigate to="/" replace /> : <Layout> <Register /> </Layout>} />
                 <Route path="/login" element={isAuth() ? <Navigate to="/" replace /> : <Layout> <Login /> </Layout>} />
-
 
                 <Route path="/admin" element={<AdminDashboardLayout> <AdminIndexDashboard /> </AdminDashboardLayout>} />
                 <Route path="/admin/categories" element={<AdminDashboardLayout> <IndexCategory /> </AdminDashboardLayout>} />

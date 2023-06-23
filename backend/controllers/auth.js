@@ -3,6 +3,7 @@ import shortId from "shortid";
 import jwt from 'jsonwebtoken';
 import { expressjwt } from "express-jwt";
 
+const expireSession = process.env.EXPIRES_SESSION;
 
 export const read = (req, res) => {
     req.profile.hashedPassword = undefined
@@ -28,8 +29,8 @@ export const register = (req, res) => {
                 newUser.save().then(result => {
 
 
-                    const token = jwt.sign({ _id: result._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-                    res.cookie('token', token, { expiresIn: '1d' });
+                    const token = jwt.sign({ _id: result._id }, process.env.JWT_SECRET, { expiresIn: expireSession });
+                    res.cookie('token', token, { expiresIn: expireSession });
                     const { _id, username, name, email, role } = result;
 
                     return res.status(200).json({
@@ -76,8 +77,8 @@ export const login = (req, res) => {
                 })
             }
 
-            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-            res.cookie('token', token, { expiresIn: '1d' });
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: expireSession });
+            res.cookie('token', token, { expiresIn: expireSession });
             const { _id, username, name, email, role } = user;
 
             return res.json({

@@ -1,5 +1,6 @@
 import { API } from '../config';
 import _fetch from 'isomorphic-fetch';
+import { HandleResponse } from './Auth';
 
 export const index = () => {
 
@@ -7,9 +8,10 @@ export const index = () => {
         method: 'GET',
 
     }).then(response => {
+
         return response.json()
 
-    }).catch(error => (error.json()))
+    }).catch(error => {});
 
 }
 
@@ -25,21 +27,25 @@ export const store = (data, token) => {
         body: JSON.stringify(data)
 
     }).then(response => {
+        HandleResponse(response)
         return response.json()
 
-    }).catch(error => (error.json()))
+    }).catch(error => {
+        console.log(error);
+    });
+
 
 }
 
 export const find = (slug) => {
-    
+
     return _fetch(`${API}/tag/${slug}`, {
         method: 'GET',
 
     }).then(response => {
         return response.json()
 
-    }).catch(error => (error.json()))
+    }).catch(error => {});
 }
 
 export const update = (id, name, token) => {
@@ -50,12 +56,13 @@ export const update = (id, name, token) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({name})
+        body: JSON.stringify({ name })
 
     }).then(response => {
+        HandleResponse(response)
         return response.json()
 
-    }).catch(error => (error.json()));
+    }).catch(error => {});
 }
 
 export const destroy = (slug, token) => {
@@ -68,7 +75,8 @@ export const destroy = (slug, token) => {
         },
 
     }).then(response => {
+        HandleResponse(response)
         return response.json()
 
-    }).catch(error => (error.json()));
+    }).catch(error => {});
 }

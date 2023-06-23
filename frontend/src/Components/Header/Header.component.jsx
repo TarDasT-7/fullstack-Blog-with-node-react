@@ -39,7 +39,7 @@ const Header = () => {
             return () => {
                 document.removeEventListener("mousedown", handleClickOutside);
             };
-        }, [modalRef, AccontRef, userBar]);
+        }, [modalRef, AccontRef]);
     }
 
     useOutsideClick(modalRef, AccontRef);

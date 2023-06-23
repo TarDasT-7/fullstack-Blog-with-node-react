@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { isAuth } from "../Actions/Auth";
+import { HandleResponse, isAuth } from "../Actions/Auth";
 
 
 const DashboardHandler = (role) => {
@@ -9,6 +9,8 @@ const DashboardHandler = (role) => {
             return '/user'
         case 1:
             return '/admin'
+        default:
+            return '/'
     }
 }
 
@@ -22,7 +24,7 @@ export const MemberAccess = ({ children }) => {
         } else if (isAuth().role !== 0) {
             history(DashboardHandler(isAuth().role))
         }
-    }, []);
+    }, [history]);
 
     return <> {children} </>
 }
@@ -37,7 +39,7 @@ export const AdminAccess = ({ children }) => {
         } else if (isAuth().role !== 1) {
             history(DashboardHandler(isAuth().role))
         }
-    }, []);
+    }, [history]);
 
     return <> {children} </>
 }

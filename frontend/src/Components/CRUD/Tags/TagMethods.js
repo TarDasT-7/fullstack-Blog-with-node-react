@@ -30,46 +30,43 @@ const alertMessageHandler = (type, message, id) => {
 
 export const TagForm = () => {
 
-    const [values, setValues] = useState({
-        name: '',
-        tags: [],
-        removed: false
-    })
+    const [value, setValue] = useState('')
 
     const [results, setResults] = useState([]);
     const [actionBtnStatus, setActionBtnStatus] = useState(false);
 
 
-    const { name, tags, removed } = values;
+    const name = value;
     const token = getCookie('token')
 
     const submitHandler = (e) => {
         e.preventDefault();
         const id = Math.ceil(1000 * Math.random());
-
         store({ name }, token).then((data) => {
-            if (data.error) {
-                setValues({ ...values })
-                return setResults([...results, alertMessageHandler('error', data.error, id)])
-            } else {
-                setValues({ ...values, name: '' })
-                setActionBtnStatus(false)
-                return setResults([...results, alertMessageHandler('success', `tag " ${data.name} " was created successfully`, id)])
+            if(data)
+            {
+                if (data.error) {
+                    return setResults([...results, alertMessageHandler('error', data.error, id)])
+                } else {
+                    setValue('')
+                    setActionBtnStatus(false)
+                    return setResults([...results, alertMessageHandler('success', `tag " ${data.name} " was created successfully`, id)])
+                }
             }
-        }).catch(error => console.log(error));
+        }).catch(err => {
+            return 0;
+        });
 
     }
 
     const changeHandler = (e) => {
-        setValues({ ...values, name: e.target.value, error: false, success: false, removed: '' })
+        setValue(e.target.value)
         if (e.target.value.trim().length > 0) {
             setActionBtnStatus(true)
         } else {
             setActionBtnStatus(false)
         }
     }
-
-
 
 
     return (
@@ -97,7 +94,7 @@ export const TagEdit = (props) => {
     const slug = props.slug;
     const [error, setError] = useState()
     const [notFound, setNotFound] = useState(null)
-    const [value, setValue] = useState(null)
+    const [value, setValue] = useState('')
     const [tagName, setTagName] = useState(null)
     const [tagID, setTagID] = useState(null)
     const token = getCookie('token')

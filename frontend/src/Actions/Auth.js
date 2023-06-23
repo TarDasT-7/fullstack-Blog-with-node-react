@@ -4,6 +4,20 @@ import cookie from 'js-cookie';
 import process from 'process'
 import { useNavigate } from 'react-router-dom';
 
+
+export const HandleResponse = (response) => {
+    
+    
+    if (response.status === 401) {
+        return signOut(() => {
+            alert('you need to login again')
+            window.location.reload();
+        })
+    } else {
+        return;
+    }
+}
+
 export const register = (user) => {
 
     return _fetch(`${API}/register`, {
@@ -37,15 +51,15 @@ export const login = (user) => {
 }
 
 export const signOut = (next) => {
-    
+
     removeCookie('token');
     removeLocalStorage('user');
-    next();
-    
+    const test = next();
+    console.log(test);
+
     return _fetch(`${API}/signout`, {
         method: 'GET'
     }).then(response => {
-        console.log('sign out successfuly');
         const history = useNavigate();
         history('/login');
     }).catch(error => {
@@ -100,7 +114,7 @@ export const authenticate = (data, next) => {
 export const isAuth = () => {
     if (process.browser) {
         const cookieChecked = getCookie('token')
-        if (cookieChecked) {
+        if (cookieChecked && cookieChecked !== 'undefined') {
             if (localStorage.getItem('user')) {
                 return JSON.parse(localStorage.getItem('user'))
             } else {
