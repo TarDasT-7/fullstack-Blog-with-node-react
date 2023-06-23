@@ -14,6 +14,7 @@ import blogRoutes from "./routes/blog.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
 import categoryRoutes from './routes/category.js'
+import tagRoutes from './routes/tag.js'
 
 
 
@@ -47,6 +48,7 @@ app.use('/api', authRoutes);
 app.use('/api', blogRoutes);
 app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', tagRoutes);
 
 
 // port
