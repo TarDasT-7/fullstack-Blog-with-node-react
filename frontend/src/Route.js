@@ -7,11 +7,11 @@ import Login from './Components/Login/Login.component'
 import Home from "./Pages/Home"
 import { isAuth } from "./Actions/Auth"
 
-import UserDashboardLayout from "./Pages/UserDashboardLayout"
 import AdminDashboardLayout from "./Pages/AdminDashboardLayout"
 import Layout from "./Pages/Layout"
 import { AdminIndexDashboard } from "./Dashboards/IndexDashboard";
 import { IndexCategory } from "./Components/CRUD/Categories/Category.component";
+import { IndexTag } from "./Components/CRUD/Tags/Tag.component";
 
 export const RouteAPI = () => {
 
@@ -36,6 +36,7 @@ export const RouteAPI = () => {
 
                 <Route path="/admin" element={<AdminDashboardLayout> <AdminIndexDashboard /> </AdminDashboardLayout>} />
                 <Route path="/admin/categories" element={<AdminDashboardLayout> <IndexCategory /> </AdminDashboardLayout>} />
+                <Route path="/admin/tags" element={<AdminDashboardLayout> <IndexTag /> </AdminDashboardLayout>} />
 
                 {/* <Route path="/user" element={<UserDashboardLayout> <h1> user </h1> </UserDashboardLayout>} /> */}
 

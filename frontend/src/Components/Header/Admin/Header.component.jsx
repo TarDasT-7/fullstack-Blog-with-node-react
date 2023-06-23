@@ -47,10 +47,10 @@ const Header = () => {
                         {Sidebar.map((item, index) => {
                             return (
                                 <li key={index} className={classes.nav_text}>
-                                    <a href={item.path}>
+                                    <Link to={item.path}>
                                         {item.icon}
                                         <span>{item.title}</span>
-                                    </a>
+                                    </Link>
                                 </li>
                             );
                         })}

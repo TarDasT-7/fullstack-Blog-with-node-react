@@ -95,7 +95,7 @@ const Header = () => {
                                             history('/admin')
                                             :
                                             history('/user');
-                                    }}>profile</li>
+                                    }}>dashboard</li>
 
                                     <li onClick={() => signOut(() => {
                                         setUserBar(false);

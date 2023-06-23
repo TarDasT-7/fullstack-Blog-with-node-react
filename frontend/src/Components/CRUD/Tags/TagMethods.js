@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import classes from './Category.module.scss'
-import { store, index, find, update, destroy } from '../../../Actions/Category';
+import classes from './Tag.module.scss'
+import { store, index, find, update, destroy } from '../../../Actions/Tag';
 
 import { getCookie } from "../../../Actions/Auth";
 
@@ -28,15 +28,19 @@ const alertMessageHandler = (type, message, id) => {
 
 }
 
-export const CategoryForm = () => {
+export const TagForm = () => {
 
-    const [value, setValue] = useState()
+    const [values, setValues] = useState({
+        name: '',
+        tags: [],
+        removed: false
+    })
 
     const [results, setResults] = useState([]);
     const [actionBtnStatus, setActionBtnStatus] = useState(false);
 
 
-    const name = value;
+    const { name, tags, removed } = values;
     const token = getCookie('token')
 
     const submitHandler = (e) => {
@@ -45,18 +49,19 @@ export const CategoryForm = () => {
 
         store({ name }, token).then((data) => {
             if (data.error) {
+                setValues({ ...values })
                 return setResults([...results, alertMessageHandler('error', data.error, id)])
             } else {
-                setValue('')
+                setValues({ ...values, name: '' })
                 setActionBtnStatus(false)
-                return setResults([...results, alertMessageHandler('success', `category " ${data.name} " was created successfully`, id)])
+                return setResults([...results, alertMessageHandler('success', `tag " ${data.name} " was created successfully`, id)])
             }
         }).catch(error => console.log(error));
 
     }
 
     const changeHandler = (e) => {
-        setValue(e.target.value)
+        setValues({ ...values, name: e.target.value, error: false, success: false, removed: '' })
         if (e.target.value.trim().length > 0) {
             setActionBtnStatus(true)
         } else {
@@ -71,8 +76,8 @@ export const CategoryForm = () => {
         <div className={classes.form_box}>
             <div className={classes.form}>
                 <form onSubmit={submitHandler}>
-                    <label htmlFor="name">Category Name</label>
-                    <input value={name} onChange={changeHandler} name="name" type="text" placeholder="Enter category name..." />
+                    <label htmlFor="name">Tag Name</label>
+                    <input value={name} onChange={changeHandler} name="name" type="text" placeholder="Enter tag name..." />
 
                     <button disabled={!actionBtnStatus} type='submit'>Save</button>
                 </form>
@@ -87,14 +92,14 @@ export const CategoryForm = () => {
 
 }
 
-export const CategoryEdit = (props) => {
+export const TagEdit = (props) => {
 
     const slug = props.slug;
     const [error, setError] = useState()
     const [notFound, setNotFound] = useState(null)
     const [value, setValue] = useState(null)
-    const [categoryName, setCategoryName] = useState(null)
-    const [categoryID, setCategoryID] = useState(null)
+    const [tagName, setTagName] = useState(null)
+    const [tagID, setTagID] = useState(null)
     const token = getCookie('token')
 
 
@@ -112,9 +117,9 @@ export const CategoryEdit = (props) => {
                 )
 
             } else {
-                setCategoryID(data._id)
+                setTagID(data._id)
                 setValue(data.name)
-                setCategoryName(data.name)
+                setTagName(data.name)
                 return
             }
         });
@@ -128,8 +133,8 @@ export const CategoryEdit = (props) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        if (name !== categoryName) {
-            update(categoryID, name, token).then((data) => {
+        if (name !== tagName) {
+            update(tagID, name, token).then((data) => {
                 if (data.error) {
                     setError(data.error);
                 } else {
@@ -152,8 +157,8 @@ export const CategoryEdit = (props) => {
         <div className={classes.form_box}>
             <div className={classes.form}>
                 <form onSubmit={submitHandler}>
-                    <label htmlFor="name">Category Name</label>
-                    <input value={name} onChange={changeHandler} name="name" type="text" placeholder="Enter category name..." />
+                    <label htmlFor="name">Tag Name</label>
+                    <input value={name} onChange={changeHandler} name="name" type="text" placeholder="Enter tag name..." />
 
                     <button type='submit'>Update</button>
                 </form>
@@ -172,7 +177,7 @@ export const CategoryEdit = (props) => {
 
 }
 
-export const CategoryDelete = (slug) => {
+export const TagDelete = (slug) => {
     const token = getCookie('token')
     destroy(slug, token).then();
 
