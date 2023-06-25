@@ -31,6 +31,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
+
 // cors
 if (process.env.NODE_ENV === 'development') {
     const corsOptions = {
@@ -49,6 +50,7 @@ app.use('/api', blogRoutes);
 app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', tagRoutes);
+
 
 
 // port
