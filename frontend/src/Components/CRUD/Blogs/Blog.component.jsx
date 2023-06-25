@@ -1,19 +1,17 @@
 import React,{ useEffect, useState } from "react";
-import { CategoryDelete, CategoryEdit, CategoryForm } from "./CategoryMethods";
+// import { CategoryDelete, CategoryEdit, CategoryForm } from "./BlogMethods";
 
 
-import classes from './Category.module.scss'
-import { index } from "../../../Actions/Category";
+import classes from './Blog.module.scss'
+import { index } from "../../../Actions/Blog";
+import { Link } from "react-router-dom";
 
 
-export const IndexCategory = () => {
+export const IndexBlog = () => {
 
-    const [body, setBody] = useState('Table')
     const [content, setContent] = useState();
 
-    useEffect(() => {
-        return contentHandler('TABLE');
-    }, [])
+
 
     function createTable() {
         index().then((data) => {
@@ -30,7 +28,7 @@ export const IndexCategory = () => {
                             </thead>
                             <tbody>
 
-                                {data.map(item => (
+                                {/* {data.map(item => (
                                     <tr key={item.slug} id={`trId_${item.slug}`}>
 
                                         <td>{item.name}</td>
@@ -40,7 +38,7 @@ export const IndexCategory = () => {
                                             <span onClick={() => contentHandler('DELETE', item.slug)} className={classes.actions_delete}>delete</span>
                                         </td>
                                     </tr>
-                                ))}
+                                ))} */}
                             </tbody>
 
                         </table>
@@ -59,46 +57,25 @@ export const IndexCategory = () => {
         }).catch(error => console.log(error));
     }
 
-    function contentHandler(param, slug) {
 
-        if (param === 'TABLE') {
-            setBody('Table')
-            createTable();
+    useEffect(() => {
+        return createTable();
+    }, [])
+    
 
-        } else if (param === 'CREATE') {
-            setBody('CreateForm')
-            setContent(<CategoryForm />)
-
-        } else if (param === 'CLOSE') {
-            setBody('Table')
-            createTable();
-        } else if (param === 'EDIT') {
-            setBody('EditForm')
-            setContent(<CategoryEdit slug={slug} />)
-
-        } else if (param === 'DELETE') {
-            CategoryDelete(slug);
-            document.getElementById(`trId_${slug}`).remove();
-        }
-
-    }
     return (
         <div className={classes.box}>
             <div className={classes.box_header}>
                 <div className={classes.header_title}>
-                    <h1> Category </h1>
+                    <h1> Blog </h1>
                 </div>
 
                 <div className={classes.header_actions}>
-                    {body !== 'CreateForm' && body !== 'EditForm' ? <span className={classes.make} onClick={() => contentHandler('CREATE')}> New Item </span> : ''}
-                    {body === 'CreateForm' || body === 'EditForm' ?
-                        <span className={classes.cancle} onClick={() => contentHandler('CLOSE')}> Close </span>
-                        : ''}
+                    <Link to="/admin/blogs/create" className={classes.make}> New Blog </Link>
                 </div>
             </div>
 
             <div className={classes.box_body}>
-                {body === 'Table'}
                 {content}
             </div>
         </div>

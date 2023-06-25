@@ -1,3 +1,4 @@
+import React from 'react';
 import AdminHeader from "../Components/Header/Admin/Header.component";
 import { AdminAccess } from "../Dashboards/Private";
 
