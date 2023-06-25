@@ -4,8 +4,8 @@ import slugify from 'slugify'
 import { errorHandler } from '../helpers/dbErrHandler.js'
 
 export const index = (req, res) => {
-    return Tag.find({}).then(cate => {
-        return res.json(cate);
+    return Tag.find({}).then(item => {
+        return res.json(item);
     });
 }
 
