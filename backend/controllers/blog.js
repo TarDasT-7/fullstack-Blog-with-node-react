@@ -7,28 +7,11 @@ import { stripHtml } from 'string-strip-html';
 import _ from 'lodash';
 import slugify from 'slugify'
 import fs from 'fs'
-import path from 'path'
-
 
 import { errorHandler } from '../helpers/dbErrHandler.js'
 import { blogCreateValidator } from "../validators/blog.js";
+import { SmartTrim } from "../helpers/blog.js";
 
-// const createValidation = (title, body, categories, tags) => {
-
-//     const validation = blogCreateValidator(title, body, categories, tags);
-//     let checkValidation = [];
-
-//     validation.forEach((item, i) => {
-//         if (item.success === false) {
-//             checkValidation.push({
-//                 title: item.title,
-//                 message: item.message
-//             });
-//         }
-//     })
-
-//     return checkValidation;
-// }
 
 export const index = (req, res) => {
     //     return Blog.find({}).then(item => {
@@ -64,6 +47,7 @@ export const store = (req, res) => {
 
         blog.title = title[0];
         blog.body = body[0];
+        blog.excerpt = SmartTrim(body[0], 320, ' ', ' ...');
         blog.mtitle = `${title[0]} | ${process.env.APP_NAME}`;
         blog.mdescription = stripHtml(body[0].substring(0, 160)).result;
         blog.postedBy = req.auth._id;
