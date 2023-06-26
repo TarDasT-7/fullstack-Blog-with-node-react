@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { TagDelete, TagEdit, TagForm } from "./TagMethods";
 
 
@@ -92,9 +92,7 @@ export const IndexTag = () => {
                 <div className={classes.header_actions}>
                     {body !== 'CreateForm' && body !== 'EditForm' ? <span className={classes.make} onClick={() => contentHandler('CREATE')}> New Item </span> : ''}
                     {body === 'CreateForm' || body === 'EditForm' ?
-                        <>
-                            <span className={classes.cancle} onClick={() => contentHandler('CLOSE')}> Close </span>
-                        </>
+                        <span className={classes.cancle} onClick={() => contentHandler('CLOSE')}> Close </span>
                         : ''}
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import classes from './Tag.module.scss'
 import { store, index, find, update, destroy } from '../../../Actions/Tag';
 

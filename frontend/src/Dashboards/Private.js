@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import React,{ Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HandleResponse, isAuth } from "../Actions/Auth";
+
 
 
 const DashboardHandler = (role) => {
@@ -26,7 +27,7 @@ export const MemberAccess = ({ children }) => {
         }
     }, [history]);
 
-    return <> {children} </>
+    return <Fragment> {children} </Fragment>
 }
 
 export const AdminAccess = ({ children }) => {
@@ -41,5 +42,5 @@ export const AdminAccess = ({ children }) => {
         }
     }, [history]);
 
-    return <> {children} </>
+    return <Fragment> {children} </Fragment>
 }
