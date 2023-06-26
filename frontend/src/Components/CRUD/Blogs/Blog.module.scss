@@ -27,9 +27,8 @@
         .header_actions {
             width: 50%;
             text-align: end;
-            
+
             a {
-                cursor: pointer;
                 padding: 10px 20px;
                 font-size: 20px;
                 font-weight: 600;
@@ -41,7 +40,6 @@
                 text-decoration: unset;
                 color: #181818;
 
-
                 &:hover {
                     box-shadow: 5px 10px 20px #0b244795;
 
@@ -50,12 +48,6 @@
 
             .make {
                 background-color: #e9bc0b;
-
-            }
-
-            .cancle {
-                background-color: #bf1d39;
-                color: #ECECEC;
 
             }
 
@@ -71,97 +63,6 @@
         background-color: #ECECEC;
         border-radius: 5px;
         display: flex;
-
-      
-        .form_box {
-            width: 100%;
-            margin: 20px;
-            display: flex;
-
-            .form {
-                width: 70%;
-
-                label {
-                    display: block;
-                    font-weight: 600;
-                    font-size: 16px;
-                    margin: 0 0 10px 0;
-                }
-
-                input {
-                    display: block;
-                    padding: 7px 10px;
-                    width: 400px;
-                    border: unset;
-                    outline: unset;
-                    border-bottom: 3px solid #0B2447;
-                    background-color: #d0d0d5b6;
-                    transition: .3s;
-
-                    &:hover,
-                    &:focus,
-                    &:active {
-                        border-color: #e9bc0b;
-                        box-shadow: 5px 10px 20px #0b244795;
-                        border-radius: 5px;
-                    }
-
-                }
-
-                button {
-                    background-color: #03C988;
-                    padding: 10px 20px;
-                    margin: 20px 0;
-                    font-size: 16px;
-                    font-weight: 600;
-                    border-radius: 5px;
-                    align-items: center;
-                    transition: .3s;
-                    border: unset;
-                    outline: unset;
-
-                    &:hover {
-                        box-shadow: 5px 10px 20px #0b244795;
-
-                    }
-                }
-            }
-
-            .result_form {
-                width: 30%;
-
-                .success_alert {
-                    background-color: #03C988;
-                    color: #ECECEC;
-                    text-align: center;
-                    min-width: 300px;
-                    border-radius: 5px;
-                    box-shadow: 5px 10px 20px #0b24474f;
-                    cursor: pointer;
-
-                    p {
-                        padding: 10px;
-                        font-size: 18px;
-                    }
-                }
-
-                .error_alert {
-                    background-color: #bf1d39;
-                    color: #ECECEC;
-                    text-align: center;
-                    min-width: 300px;
-                    border-radius: 5px;
-                    box-shadow: 5px 10px 20px #0b24474f;
-                    cursor: pointer;
-
-                    p {
-                        padding: 10px;
-                        font-size: 18px;
-
-                    }
-                }
-            }
-        }
 
         .table {
             width: 100%;
@@ -212,7 +113,7 @@
 
             .actions_bar {
 
-                span{
+                span {
                     text-decoration: unset;
                     padding: 5px 10px;
                     border-radius: 5px;
@@ -220,7 +121,7 @@
                     margin: 0 10px 0;
                     cursor: pointer;
                 }
-                
+
                 .actions_edit {
                     background-color: #46b6d9;
                 }
@@ -232,10 +133,4 @@
         }
     }
 
-}
-.not_found{
-    width: 100%;
-    margin: 50px 0;
-    text-align: center;
-    color: #bf1d39;
 }
