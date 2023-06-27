@@ -24,6 +24,8 @@ export const store = (req, res) => {
     const form = new IncomingForm();
     form.keepExtensions = true;
     form.multiples = true;
+    form.fileupload = true;
+
 
     form.parse(req, (err, fields, files) => {
 
