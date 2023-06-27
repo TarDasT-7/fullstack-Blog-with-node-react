@@ -248,3 +248,18 @@ export const listAllBlogCategoryTag = (req, res) => {
                 })
         });
 }
+
+export const photo = (req, res) => {
+
+    const slug = req.params.slug.toLowerCase();
+    Blog.findOne({ slug }).select('photo').then(result => {
+        if (!result) {
+            return res.status(404).json({
+                error: 'we not found any blog with this slug...'
+            })
+        }
+        res.set('Content-Type', result.photo.contentType)
+        return res.send(result.photo.data)
+    })
+
+}
