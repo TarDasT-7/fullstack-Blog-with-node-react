@@ -32,7 +32,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    hashedPassword : {
+    hashedPassword: {
         type: String,
         required: true
     },
@@ -52,46 +52,45 @@ const userSchema = new Schema({
         data: String,
         // default: ''
     }
-},{timestamp: true});
+}, { timestamp: true });
 
 userSchema.virtual('password')
-.set(function(password){
+    .set(function (password) {
 
-    // create a temporarity variable called _password
-    this._password = password
+        // create a temporarity variable called _password
+        this._password = password
 
-    // generate salt
-    this.salt = this.makeSalt()
+        // generate salt
+        this.salt = this.makeSalt()
 
-    // encryptPassword
-    this.hashedPassword  = this.encryptPassword(password)
+        // encryptPassword
+        this.hashedPassword = this.encryptPassword(password)
 
-})
-.get(function () {
-    return this._password;
-})
+    })
+    .get(function () {
+        return this._password;
+    })
 
 userSchema.methods = {
 
     authenticate: function (plainText) {
-        return this.encryptPassword(plainText) === this.hashedPassword ;
+        return this.encryptPassword(plainText) === this.hashedPassword;
     },
 
     encryptPassword: function (password) {
-        if(!password) return ''
-        try{
+        if (!password) return ''
+        try {
             return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
 
-        }catch(error)
-        {
+        } catch (error) {
             return '';
         }
     },
 
-    makeSalt: function() {
+    makeSalt: function () {
         return Math.round(new Date().valueOf() * Math.random()) + '';
     }
 }
 
-const conn = mongoose.createConnection(`${process.env.DATABASE_LOCAL}/${process.env.DATABASE_NAME}`);
-export default conn.model('User', userSchema);
+// const connectMongo = mongoose.createConnection(`${process.env.DATABASE_LOCAL}/${process.env.DATABASE_NAME}`);
+export default mongoose.model('User', userSchema);

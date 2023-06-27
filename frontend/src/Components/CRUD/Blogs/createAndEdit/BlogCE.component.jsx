@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, json } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 import ReactQuill, { Quill } from 'react-quill';
 import { MultiSelect } from "react-multi-select-component";
 
@@ -9,7 +9,8 @@ import { store } from "../../../../Actions/Blog";
 
 import '../../../../Style/quill.css'
 import classes from './BlogCE.module.scss'
-import { ToolbarOption, formats } from "../../../../Data/Quill";
+
+import { modules, formats } from "../../../../Helpers/Quill";
 import { getCookie } from "../../../../Actions/Auth";
 import { MAX_PHOTO_SIZE } from "../../../../config";
 import SizeHandler from "../../../../Helpers/SizeHandler";
@@ -17,6 +18,8 @@ import { blogFromLocalStorage, cancleForm } from './BCEMethods'
 
 export const CreateBlogComponent = () => {
 
+    const formData = new FormData()
+    const history = useNavigate();
     const token = getCookie('token')
     const [body, setBody] = useState(null);
     const [title, setTitle] = useState(null);
@@ -80,7 +83,7 @@ export const CreateBlogComponent = () => {
         }
 
         if (file) {
-            if (SizeHandler(file.size) > SizeHandler(MAX_PHOTO_SIZE)) {
+            if (file.size > MAX_PHOTO_SIZE) {
                 result[i] = {
                     title: 'photo',
                     success: false,
@@ -175,23 +178,40 @@ export const CreateBlogComponent = () => {
 
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        const blog = {
-            title,
-            body,
-            file,
-            categories,
-            tags,
-        }
+        let categoriesCustomize = '';
+        let tagsCustomize = '';
+        const blog = { title, body, file, categories, tags, }
 
-        if (validation(blog).length > 0)
-            return;
+        if (validation(blog).length > 0) return;
 
+        categories.map((item, i) => {
+            if (categories.length > i + 1)
+                categoriesCustomize += item.value + ','
+            else
+                categoriesCustomize += item.value
+        })
+        tags.map((item, i) => {
+            if (tags.length > i + 1)
+                tagsCustomize += item.value + ','
+            else
+                tagsCustomize += item.value
+        })
 
-        store(blog, token).then(data => {
+        // ---------------------------
+        formData.append('title', title)
+        formData.append('photo', file)
+        formData.append('body', body)
+        formData.append('categories', categoriesCustomize)
+        formData.append('tags', tagsCustomize)
+        // ---------------------------
+
+        store(formData, token).then(data => {
             if (data.error) {
                 console.log(data.error);
             } else {
-                console.log(data);
+                localStorage.removeItem('blog')
+                document.getElementsByClassName("ql-editor")[0].innerHTML = null;
+                history('/admin/blogs')
             }
         }).catch(error => {
             console.log('catch component ' + error);
@@ -276,7 +296,7 @@ export const CreateBlogComponent = () => {
                         <label className={classes.body_label} htmlFor="body">Body</label>
                         {errorInp.body ? <span className={classes.valid_err}>{errorInp.body}</span> : ''}
                         <div className={classes.form_quill}>
-                            <ReactQuill value={body || ''} onChange={changeHandler('body')} modules={CreateBlogComponent.modules} name="body" formats={CreateBlogComponent.formats} placeholder="write something amazing..." />
+                            <ReactQuill value={body || ''} onChange={changeHandler('body')} modules={modules} name="body" formats={formats} placeholder="write something amazing..." />
                         </div>
 
                     </form>
@@ -287,11 +307,6 @@ export const CreateBlogComponent = () => {
     );
 
 }
-CreateBlogComponent.modules = {
-    toolbar: ToolbarOption,
-}
-
-CreateBlogComponent.formats = formats;
 
 
 export const EditBlogComponent = () => { }

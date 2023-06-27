@@ -79,7 +79,7 @@ export const destroy = (req, res) => {
         return Category.findOneAndRemove({ slug }).then(doc => {
             if (doc) {
                 return res.json({
-                    error: doc.name + ' --removed successfuly'
+                    message: doc.name + ' --removed successfuly'
                 })
             }
             return res.status(400).json({

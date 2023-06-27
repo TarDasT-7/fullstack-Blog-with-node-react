@@ -15,6 +15,6 @@ const tagSchema = new Schema({
     }
 }, { timestamps: true });
 
-const conn = mongoose.createConnection(`${process.env.DATABASE_LOCAL}/${process.env.DATABASE_NAME}`);
-export default conn.model('Tag', tagSchema);
+// const connectMongo = mongoose.createConnection(`${process.env.DATABASE_LOCAL}/${process.env.DATABASE_NAME}`);
+export default mongoose.model('Tag', tagSchema);
 
