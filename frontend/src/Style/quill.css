@@ -39,7 +39,7 @@
 .ql-editor {
   box-sizing: border-box;
   line-height: 1.42;
-  min-height: 25vh;
+  min-height: 50vh;
   outline: none;
   overflow-y: auto;
   padding: 12px 15px;
