@@ -47,11 +47,18 @@ export const blogCreateValidator = (title = false, body = false, categories = fa
     return checkValidation;
 }
 
-export const blogUpdateValidator = (body = false, categories = false, tags = false) => {
+export const blogUpdateValidator = (title = false, body = false, categories = false, tags = false) => {
 
     let result = Array();
     let checkValidation = [];
 
+    if (!title || !title[0].length) {
+        result[0] = {
+            title: 'title',
+            success: false,
+            message: 'Title is required'
+        }
+    }
     if (!body || body[0].length < 200) {
 
         result[1] = {

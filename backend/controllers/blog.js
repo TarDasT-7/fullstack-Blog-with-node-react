@@ -146,9 +146,9 @@ export const update = (req, res) => {
             })
         }
 
-        const { body, categories, tags } = fields;
+        const { title, body, categories, tags } = fields;
 
-        const checkValidation = blogUpdateValidator(body, categories, tags);
+        const checkValidation = blogUpdateValidator(title, body, categories, tags);
 
         if (checkValidation.length > 0) {
             return res.status(400).json({
@@ -156,6 +156,7 @@ export const update = (req, res) => {
             })
         }
 
+        const NEWtitle = title[0];
         const NEWbody = body[0];
         const NEWexcerpt = SmartTrim(body[0], 320, ' ', ' ...');
         const NEWmdescription = stripHtml(body[0].substring(0, 160)).result;
@@ -176,7 +177,7 @@ export const update = (req, res) => {
             }
         }
 
-        const update = { body: NEWbody, excerpt: NEWexcerpt, mdescription: NEWmdescription, photo: NEWphoto, categories: arrayOfCategories, tags: arrayOfTags };
+        const update = { title: NEWtitle, body: NEWbody, excerpt: NEWexcerpt, mdescription: NEWmdescription, photo: NEWphoto, categories: arrayOfCategories, tags: arrayOfTags };
 
         Blog.findOneAndUpdate({ slug }, update, { new: true }).then(data => {
 
@@ -187,16 +188,7 @@ export const update = (req, res) => {
             }
             return res.json(data)
         })
-
     })
-
-
-
-
-
-
-
-
 }
 
 export const destroy = (req, res) => {
