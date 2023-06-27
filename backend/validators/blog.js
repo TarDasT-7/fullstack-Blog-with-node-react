@@ -20,7 +20,7 @@ export const blogCreateValidator = (title = false, body = false, categories = fa
         }
     }
 
-    if (!categories || !categories.length === 0) {
+    if (!categories || categories.length === 0) {
         result[2] = {
             title: 'categories',
             success: false,
@@ -28,7 +28,7 @@ export const blogCreateValidator = (title = false, body = false, categories = fa
         }
     }
 
-    if (!tags || !tags.length === 0) {
+    if (!tags || tags.length === 0) {
         result[3] = {
             title: 'tags',
             success: false,

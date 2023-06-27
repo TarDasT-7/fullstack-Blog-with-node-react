@@ -58,7 +58,7 @@ export const store = (req, res) => {
 
         if (files.photo) {
 
-            if (files.photo.size > 10000000) {
+            if (files.photo.size > process.env.MAX_PHOTO_SIZE) {
                 return res.status(400).json({
                     error: "Image should be less then 1mb in size"
                 })
