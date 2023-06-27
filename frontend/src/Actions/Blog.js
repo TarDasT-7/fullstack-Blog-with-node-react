@@ -32,7 +32,9 @@ export const store = (data, token) => {
         HandleResponse(response)
         return response.json()
 
-    }).catch(error => {});
+    }).catch(error => {
+        console.log('catch action ' + error);
+    });
 
 }
 
