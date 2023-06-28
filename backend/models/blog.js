@@ -48,7 +48,7 @@ const blogSchema = new Schema({
         ref: 'User',
     }
 
-}, { timestamp: true });
+}, { timestamps: true });
 
 // const connectMongo = mongoose.createConnection(`${process.env.DATABASE_LOCAL}/${process.env.DATABASE_NAME}`);
 export default mongoose.model('Blog', blogSchema);
