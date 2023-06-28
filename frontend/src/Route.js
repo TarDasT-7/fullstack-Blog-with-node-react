@@ -1,4 +1,4 @@
-import React,{ useEffect } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom"
 import nprogress from "nprogress";
 
@@ -14,6 +14,7 @@ import { IndexCategory } from "./Components/CRUD/Categories/Category.component";
 import { IndexTag } from "./Components/CRUD/Tags/Tag.component";
 import { IndexBlog } from "./Components/CRUD/Blogs/Blog.component";
 import { CreateBlogComponent, EditBlogComponent } from "./Components/CRUD/Blogs/createAndEdit/BlogCE.component";
+import BlogComponent from "./Components/MenuBar/Blog/Blog.component";
 
 export const RouteAPI = () => {
 
@@ -34,6 +35,7 @@ export const RouteAPI = () => {
 
             <Route path="/register" element={isAuth() ? <Navigate to="/" replace /> : <Layout> <Register /> </Layout>} />
             <Route path="/login" element={isAuth() ? <Navigate to="/" replace /> : <Layout> <Login /> </Layout>} />
+            <Route path="/blogs" element={<Layout> <BlogComponent /> </Layout>} />
 
             <Route path="/admin" element={<AdminDashboardLayout> <AdminIndexDashboard /> </AdminDashboardLayout>} />
             <Route path="/admin/categories" element={<AdminDashboardLayout> <IndexCategory /> </AdminDashboardLayout>} />
