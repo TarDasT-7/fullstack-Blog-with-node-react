@@ -1,0 +1,31 @@
+.main {}
+
+.header {
+    text-align: center;
+
+    .title_header {
+        margin: 10px auto;
+        width: 50%;
+        background-color: #e9bc0b;
+        border-radius: 10px;
+        box-shadow: 5px 10px 20px #0e1e37f0;
+        cursor: default;
+
+        h1 {
+            font-size: 30px;
+            font-weight: 700;
+            padding: 15px;
+        }
+    }
+
+}
+
+.content {
+    width: 100%;
+    padding: 20px;
+    margin: 30px 0;
+    border: unset;
+    border-radius: 10px;
+    box-shadow: 5px 10px 20px #0e1e37f0;
+    text-align: left;
+}

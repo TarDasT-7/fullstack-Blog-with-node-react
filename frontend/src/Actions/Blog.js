@@ -17,6 +17,21 @@ export const index = () => {
     });
 
 }
+export const listBlogWithCategoriesAndTags = () => {
+
+    return _fetch(`${API}/blog-category-tag`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+        },
+    }).then(response => {
+        return response.json()
+
+    }).catch(error => {
+        console.log(error);
+    });
+
+}
 
 export const store = (data, token) => {
 

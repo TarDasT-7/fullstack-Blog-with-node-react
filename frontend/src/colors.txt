@@ -1,4 +1,5 @@
 light 01 : #ECECEC
+light 02 : #DBDFEA
 
 dark 01 : #181818
 dark 02 : #0B2447
@@ -10,3 +11,4 @@ success 01 : #03C988
 red 01 : #bf1d39
 
 blue 01 : #46b6d9
+blue (dark) 02 : #041324
