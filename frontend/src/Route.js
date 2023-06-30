@@ -42,7 +42,7 @@ export const RouteAPI = () => {
             <Route path="/admin/tags" element={<AdminDashboardLayout> <IndexTag /> </AdminDashboardLayout>} />
             <Route path="/admin/blogs" element={<AdminDashboardLayout> <IndexBlog /> </AdminDashboardLayout>} />
             <Route path="/admin/blogs/create" element={<AdminDashboardLayout> <CreateBlogComponent /> </AdminDashboardLayout>} />
-            <Route path="/admin/blogs/edit/:id" element={<AdminDashboardLayout> <EditBlogComponent /> </AdminDashboardLayout>} />
+            <Route path="/admin/blogs/edit/:slug" element={<AdminDashboardLayout> <EditBlogComponent /> </AdminDashboardLayout>} />
 
             {/* <Route path="/user" element={<UserDashboardLayout> <h1> user </h1> </UserDashboardLayout>} /> */}
 
