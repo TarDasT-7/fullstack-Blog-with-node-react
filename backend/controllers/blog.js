@@ -18,7 +18,7 @@ export const index = (req, res) => {
         .populate('categories', '_id name slug')
         .populate('tags', '_id name slug')
         .populate('postedBy', '_id name username')
-        .select('_id title slug excerpt mdes categories tags postedBy createdAt updatedAt')
+        .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
         .then(data => {
             res.json(data);
         });
