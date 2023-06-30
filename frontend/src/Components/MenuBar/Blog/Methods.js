@@ -1,6 +1,6 @@
+import BlogCardComponent from "../Card/BlogCard.component";
 import classes from './Blog.module.scss'
 
-import BlogCardComponent from "../Card/BlogCard.component";
 
 export const ShowBlog = (blogs) => {
     return blogs.map((blog, index) => {
@@ -25,3 +25,4 @@ export const ShowTags = (tags) => {
         )
     })
 }
+

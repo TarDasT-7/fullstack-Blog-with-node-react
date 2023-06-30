@@ -9,7 +9,6 @@ export const index = () => {
         method: 'GET',
 
     }).then(response => {
-        console.log(response);
         return response.json()
 
     }).catch(error => {
@@ -17,6 +16,7 @@ export const index = () => {
     });
 
 }
+
 export const listBlogWithCategoriesAndTags = () => {
 
     return _fetch(`${API}/blog-category-tag`, {
@@ -53,46 +53,44 @@ export const store = (data, token) => {
 
 }
 
-// export const find = (slug) => {
+export const find = (slug) => {
     
-//     return _fetch(`${API}/category/${slug}`, {
-//         method: 'GET',
+    return _fetch(`${API}/blog/${slug}`, {
+        method: 'GET',
 
-//     }).then(response => {
-//         return response.json()
+    }).then(response => {
+        return response.json()
 
-//     }).catch(error => {});
-// }
+    }).catch(error => {});
+}
 
-// export const update = (id, name, token) => {
-//     return _fetch(`${API}/category/${id}`, {
-//         method: 'PATCH',
-//         headers: {
-//             Accept: 'application/json',
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${token}`
-//         },
-//         body: JSON.stringify({name})
+export const update = (slug, data, token) => {
+    return _fetch(`${API}/blog/${slug}`, {
+        method: 'PATCH',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: data
 
-//     }).then(response => {
-//         HandleResponse(response)
-//         return response.json()
+    }).then(response => {
+        HandleResponse(response)
+        return response.json()
 
-//     }).catch(error => {});
-// }
+    }).catch(error => {});
+}
 
-// export const destroy = (slug, token) => {
-//     return _fetch(`${API}/category/${slug}`, {
-//         method: 'DELETE',
-//         headers: {
-//             Accept: 'application/json',
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${token}`
-//         },
+export const destroy = (slug, token) => {
+    return _fetch(`${API}/blog/${slug}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        },
 
-//     }).then(response => {
-//         HandleResponse(response)
-//         return response.json()
+    }).then(response => {
+        HandleResponse(response)
+        return response.json()
 
-//     }).catch(error => {});
-// }
+    }).catch(error => {});
+}

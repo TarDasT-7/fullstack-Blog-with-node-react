@@ -1,17 +1,27 @@
-import React,{ useEffect, useState } from "react";
-// import { CategoryDelete, CategoryEdit, CategoryForm } from "./BlogMethods";
-
-
+import React, { useEffect, useState } from "react";
 import classes from './Blog.module.scss'
-import { index } from "../../../Actions/Blog";
-import { Link } from "react-router-dom";
+import { destroy, index } from "../../../Actions/Blog";
+import { Link, useNavigate } from "react-router-dom";
+import { API } from "../../../config";
+import { getCookie } from "../../../Actions/Auth";
 
 
 export const IndexBlog = () => {
 
     const [content, setContent] = useState();
+    const history = useNavigate();
 
+    function contentHandler(param, key) {
 
+        if (param === 'EDIT') {
+            history(`/admin/blogs/edit/${key}`)
+
+        } else if (param === 'DELETE') {
+            const token = getCookie('token')
+            destroy(key, token);
+            document.getElementById(`trId_${key}`).remove();
+        }
+    }
 
     function createTable() {
         index().then((data) => {
@@ -21,24 +31,25 @@ export const IndexBlog = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Slug</th>
+                                    <th>Title</th>
+                                    <th>Photo</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-
-                                {/* {data.map(item => (
+                                {data.map(item => (
                                     <tr key={item.slug} id={`trId_${item.slug}`}>
 
-                                        <td>{item.name}</td>
-                                        <td>{item.slug}</td>
+                                        <td>{item.title}</td>
+                                        <td style={{ textAlign: "center" }}>
+                                            <img src={`${API}/blog/photo/${item.slug}`} alt={item.slug} style={{ width: "100px" }} />
+                                        </td>
                                         <td className={classes.actions_bar}>
                                             <span onClick={() => contentHandler('EDIT', item.slug)} className={classes.actions_edit}>edit</span>
                                             <span onClick={() => contentHandler('DELETE', item.slug)} className={classes.actions_delete}>delete</span>
                                         </td>
                                     </tr>
-                                ))} */}
+                                ))}
                             </tbody>
 
                         </table>
@@ -57,11 +68,9 @@ export const IndexBlog = () => {
         }).catch(error => console.log(error));
     }
 
-
     useEffect(() => {
         return createTable();
     }, [])
-    
 
     return (
         <div className={classes.box}>

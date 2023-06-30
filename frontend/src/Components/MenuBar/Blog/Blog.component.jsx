@@ -4,6 +4,7 @@ import classes from './Blog.module.scss'
 import MenuContent from "../../../Pages/MenuContent";
 import { LoadingComponent } from "../../Loading/Loading.component";
 import { ShowBlog, ShowCategories, ShowTags } from "./Methods";
+import { SetTitle } from "../../../Helpers/SetHeader";
 
 const BlogComponent = () => {
 
@@ -34,25 +35,28 @@ const BlogComponent = () => {
     useEffect(() => {
         DataHandler();
     }, [])
-
+    
     return (
-        <MenuContent>
-            {loading ? <LoadingComponent /> :
-                <main className={classes.main}>
-                    <div>
-                        <header className={classes.header}>
-                            <div className={classes.title_header}>
-                                <h1>List of blogs</h1>
-                            </div>
-                        </header>
-                    </div>
-                    <div className={classes.content}>
-                        {blogs}
-                    </div>
-                </main>
+        <>
+            {SetTitle('Blogs Page')}
+            <MenuContent>
+                {loading ? <LoadingComponent /> :
+                    <main className={classes.main}>
+                        <div>
+                            <header className={classes.header}>
+                                <div className={classes.title_header}>
+                                    <h1>List of blogs</h1>
+                                </div>
+                            </header>
+                        </div>
+                        <div className={classes.content}>
+                            {blogs}
+                        </div>
+                    </main>
 
-            }
-        </MenuContent>
+                }
+            </MenuContent>
+        </>
     );
 
 }
